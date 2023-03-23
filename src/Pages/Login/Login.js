@@ -15,7 +15,7 @@ const Login = () => {
   //   handleSubmit,
   // } = useForm();
 
-  const { signIn, loading, signInWithGoogle, setLoading, resetPassword } = useContext(AuthContext);
+  const { signIn, loading, signInWithGoogle, setLoading, resetPassword, user } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
@@ -48,25 +48,29 @@ const Login = () => {
       });
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setLoginUserEmail(email);
-      });
-  };
-
   const handleGoogleSignin = () => {
     signInWithGoogle().then((result) => {
       console.log(result);
-      saveUser(result.user.displayName, result.user.email);
+      const user = result.user;
+      setLoginUserEmail(user?.email);
+
+      if (result) {
+        const addUser = {
+          name: user?.displayName,
+          email: user?.email,
+        };
+        fetch("http://localhost:5000/googleBuyer", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(addUser),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+          });
+      }
     });
   };
 

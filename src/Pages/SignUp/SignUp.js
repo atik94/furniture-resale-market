@@ -77,9 +77,32 @@ const SignUp = () => {
   };
 
   const handleGoogleSignin = () => {
+    // signInWithGoogle().then((result) => {
+    //   console.log(result);
+    //   saveUser(result.user.displayName, result.user.email);
+    // });
+    // alert("hit");
     signInWithGoogle().then((result) => {
       console.log(result);
-      saveUser(result.user.displayName, result.user.email);
+      const user = result.user;
+
+      if (result) {
+        const addUser = {
+          name: user?.displayName,
+          email: user?.email,
+        };
+        fetch("http://localhost:5000/googleBuyer", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(addUser),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+          });
+      }
     });
   };
 
