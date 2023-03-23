@@ -7,7 +7,9 @@ import Buyers from "../../Pages/Dashboard/Buyers/Buyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Sellers from "../../Pages/Dashboard/Sellers/Sellers";
+import Blog from "../../Pages/Home/Blog/Blog";
 import CategoryProducts from "../../Pages/Home/Categories/CategoryProducts";
 import Home from "../../Pages/Home/Home/Home";
 import NotFound from "../../Pages/Home/NotFound/NotFound";
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "/category/:_id",
@@ -75,6 +81,15 @@ const router = createBrowserRouter([
             <MyOrders></MyOrders>
           </BuyerRoute>
         ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: (
+          <BuyerRoute>
+            <Payment></Payment>
+          </BuyerRoute>
+        ),
+        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
       },
       {
         path: "/dashboard/addproducts",
