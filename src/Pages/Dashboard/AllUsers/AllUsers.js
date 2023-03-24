@@ -24,7 +24,6 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -34,9 +33,6 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>
-                  <button className="btn btn-xs btn-danger">Delete</button>
-                </td>
               </tr>
             ))}
           </tbody>
