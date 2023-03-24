@@ -1,9 +1,11 @@
 import React from "react";
+import useTitle from "../../../hooks/useTitle";
 
 const Contact = () => {
+  useTitle("Contact");
   return (
-    <section id="contact">
-      <div className="hero min-h-screen bg-gray-700">
+    <section id="contact" className="">
+      <div className="hero min-h-screen bg-gray-700 p-6 py-10">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left text-white">
             <h1 className="text-5xl font-bold">Get in Touch</h1>

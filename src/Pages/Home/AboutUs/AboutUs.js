@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <section
       id="about"
-      className="text-center text-white py-12 mt-6"
+      className="text-center text-white py-12 mt-10 mb-10"
       style={{
         background: `url(${aboutus})`,
         backgroundSize: "cover",
